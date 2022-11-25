@@ -1,0 +1,957 @@
+/* Parametros */
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+/* 
+    font-family: 'Major Mono Display', monospace;
+    font-family: 'Montserrat', sans-serif;
+*/
+
+/* Variables */
+    :root{
+        /* Fonts */
+        --major-mono: 'Major Mono Display', monospace;
+        --montserrat: 'Montserrat', sans-serif;
+
+        /* Color fonts */
+        --color-primario: white;
+        --color-primario-d: black;
+
+        /* Color granding */
+        --header: linear-gradient(180deg, #FFFFFF 32.75%, rgba(255, 255, 255, 0) 100%);
+        --footer: linear-gradient(0deg, #FF00E5 -17.47%, rgba(0, 131, 253, 0.41) 43.1%, rgba(196, 196, 196, 0) 100%);
+        --glass-der: linear-gradient(249.77deg, rgb(255, 255, 255) 15%, rgba(255, 255, 255, 0) 97.25%);
+        --glass: linear-gradient(69.88deg, rgb(255, 255, 255) 15%, rgba(255, 255, 255, 0) 100%);
+        --card: conic-gradient(from 180deg at 50% 50%, #df9aff 0deg, rgba(173, 17, 213, 0) 360deg);
+        --button: linear-gradient(260.74deg, #00A3FF 17.97%, rgba(219, 0, 255, 0.75) 100%);
+
+        /* Shadows */
+        --neon: 0px 0px 13px 3px rgba(255, 255, 255, 0.77);
+    }
+/* Normalizadores */
+    *{
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+        /* outline: 2px dashed purple; */
+    }
+    a{
+        color: var(--color-primario-d);
+        text-decoration: none;
+    }
+    h1, h2, h3, h5, h6, p{
+        color: var(--color-primario-d);
+        font-family: var(--montserrat);
+    }
+    h1{
+        font-size: 25px;
+    }
+    h2{
+        font-size: 25px;
+    }
+    h3{
+        font-size: 20px;
+    }
+    h4{
+        color: var(--color-primario-d);
+        font-family: var(--montserrat);
+        font-weight: 400;
+        font-size: 14px;
+    }
+    p{
+        font-family: var(--montserrat);
+        color: var(--color-primario-d);
+    }
+    ul{
+        font-family: var(--montserrat);
+        color: var(--color-primario-d);
+        list-style: none;
+        font-size: 15px;
+    }
+    /* Reglas recursivas */
+    /* Este flex le da la organización centrada en vertical para el movil*/
+    .flex{
+        /*flex*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    /* Esta clase es la que usan todos los divs dentro de los section para darle el estilo de la tarjeta cristalizada. */
+    .glass{
+        width: 100%;
+        height: 100%;
+        border-radius: 45px;
+        border: 2px rgba(255, 255, 255, 0.18);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        padding: 4%;
+        overflow: hidden;
+        /* Cambiar hidden por scroll por si quiero que se mueva. */
+    }
+    /* Esta clase sirve para centrar las imagenes con sus dimensiones originales sin que se salgan del espacio ni se deformen. */
+    .imgcen{
+        width: 100%;
+        height: 100%;
+        padding: 4%;
+        margin: auto;
+        object-fit: contain;
+    }
+    /* Las dos siguientes clases sirver para darle un color blanco hacia el lado derecho o izquierdo para que el texto se lea bien. */
+    .izg{
+        background-image: var(--glass);
+    }
+    .derg{
+        background-image: var(--glass-der);
+    }
+    /* -----------------------Reglas generales------------------------- */
+    .marco{
+        width: 100%;
+        height: 100vh;
+        z-index: 0;
+    }
+    /* Header */
+    header{
+        width: 100%;
+        height: 75px;
+        background: var(--header);
+        position: fixed;
+        z-index: 2000;
+        padding-top: 10px;
+    }
+    .logo{
+        height: 25px;
+        padding: 5px;
+        margin: 15px;
+    }
+    .logo h1{
+        color: var(--color-primario-d);
+        font-family: var(--major-mono);
+        display: inline;
+    }
+    /* Menu mobil */
+    /* Estilo del botón que abre el menú del móvil. */
+    .menubtn{
+        display: block;
+        color: var(--color-primario-d);
+        font-size: 20px;
+        position: fixed;
+        right: 5px;
+        top: 0px;
+        padding: 20px;
+        border: none;
+        background-color: transparent;
+        z-index: 3000;
+    }
+    /* Esta clase da la posición fija del menu del móvil con su z-index. */
+    .menumob{
+        position: fixed;
+        width: 100vw;
+        background-color: var(--color-primario);
+        overflow: hidden;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        top: 0px;
+        margin: auto;
+        z-index: 2500;
+        display: none;
+    }
+    /* Doy la estructura flex al menú en vertical. */
+    .menumobInt{
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        margin: auto;
+        
+        /*flex*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .menumobInt a{
+        color: var(--color-primario-d);
+        font-family: var(--montserrat);
+        font-size: 25px;
+        padding: 5px;
+        margin: 15px;
+    }
+    /* Son clases para el formato de Desktop así que no se muestran */
+    .menu-desk{
+        display: none;
+    }
+    /* Sidebar */
+    .sidebar-der,
+    .sidebar-iz{
+        display: none;
+    }
+    
+    /* Sections */
+    section{
+        width: 100%;
+        height: 100vh;
+        padding: 15% 4% 4%;
+
+    }
+    section div article {
+        width: 100%;
+        padding: 4%;
+    }
+    /* Section 1 */
+    .s1 h2,
+    .s1 p{
+        text-align: center;
+    }
+    .s1 figure{
+        width: 100%;
+        height: 50%;
+    }
+    /* Section 2 */
+    .grids2{
+        width: 100%;
+        height: 75%;
+        /*Grid*/
+        display: grid;
+        grid-template-rows: 10% 50% 40%;
+    }
+    .s2 .skill{
+        text-align: center;
+    }
+    .fila1 article,
+    .fila2 article{
+        width: 50%;
+        height: 100%;
+        float: left;
+    }
+    .s2 h2{
+        height: 15%;
+        margin-bottom: 10%;
+    }
+    .s2 h2,
+    .lis2{
+        text-align: center;
+        font-size: 11px;
+    }
+    .lis2{
+        padding: 2% 0px;
+    }
+    .s2 h4{
+        padding: 2% 0px;
+        margin-left: 2%;
+        font-size: 10px;
+    }
+    .s2 figure{
+        width: 100%;
+        height: 25%;
+    }
+
+/* Section 2 levels */
+/* La siguiente clase es la barra de nivel al 100% para darle un principio y un fin. */
+.level-max{
+    width: 100%;
+    height: 5px;
+    background-color: rgba(113, 113, 113, 0.38);
+    border-radius: 11px;
+    margin-bottom: 3px;
+}
+/* Las siguientes clase es el conjunto de propiedades de estilo de la barra de nivel.*/
+.level{
+    height: 100%;
+    background-color: var(--color-primario-d);
+    box-shadow: var(--neon);
+    border-radius: 11px;
+}
+/* Las siguientes clases es el ancho de cada conocimiento según el nivel que tenga. */
+.html{
+    width: 80%;
+}
+.css{
+    width: 60%;
+}
+.js{
+    width: 10%;
+}
+.php{
+    width: 5%;
+}
+.sql{
+    width: 5%;
+}
+.ae{
+    width: 20%;
+}
+.ps{
+    width: 30%;
+}
+.fi{
+    width: 50%;
+}
+.sv{
+    width: 60%;
+}
+.bl{
+    width: 20%;
+}
+.sp{
+    width: 95%;
+}
+.fr{
+    width: 60%;
+}
+.en{
+    width: 40%;
+}
+/* section 3 */
+.s3 figure{
+    width: 100%;
+    height: 50%;
+}
+.s3ed{
+    width: 100%;
+    height: 50%;
+    padding: 10px 20px 15px 20px;
+    margin: auto;
+}
+.half{
+    margin: 10% 0%;
+}
+.s3 ul,
+.s3 h2,
+.s3 h3,
+.s3 h4{
+    text-align: center;
+}
+.s3 a{
+    width: 40%;
+    display: block;
+    margin: auto;
+    left: 0px;
+    right: 0px;
+}
+/* Estilo del botón de contacto al final de la página del About. */
+.btnC{
+    display: block;
+    width: 40%;
+    height: 35px;
+    border: none;
+    padding: 8px 0px 0px;
+    font-family: var(--montserrat);
+    font-size: 15px;
+    color: var(--color-primario);
+    text-shadow: 0px 0px 5px transparent;
+    text-align: center;
+    background-image: var(--button);
+    border-radius: 45px;
+    cursor: pointer;
+    transition: .3s;
+    overflow: hidden;
+    margin: auto;
+}
+
+/* Footer */
+footer{
+    width: 100%;
+    background-image: var(--footer);
+}
+footer h3{
+    text-align: center;
+    padding: 20px;
+    padding-top: 50px;
+}
+.imgcert{
+    width: 100%;
+    padding: 5% 1%;
+    
+    /*flex*/
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.imgcert img{
+    height: 20px;
+    margin-bottom: 5%;
+}
+.copy{
+    text-align: center;
+    padding: 10%;
+}
+
+
+/* Portfolio */
+/* Section 1 */
+.pad{
+    width: 100%;
+    height: 100%;
+    padding: 3%;
+}
+/* Esta clase es para no dejar en vacio las tarjetitas de mis futuros proyectos. */
+.card{
+    width: 100%;
+    height: 10%;
+    background-image: var(--card);
+    border-radius: 20px;
+    margin: auto;
+    margin: 5% 0px;
+    overflow: hidden;
+}
+.card article,
+.card figure{
+    width: 50%;
+    height: 100%;
+    float: left;
+    text-align: center;
+    margin: auto;
+}
+.card figure img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: .8;
+}
+
+/* Contact */
+.cs1w{
+    width: 100%;
+    margin: auto;
+}
+.cs1fig{
+    width: 50%;
+    margin: auto;
+}
+.cs1 h2{
+    text-align: center;
+}
+.marg-form{
+    margin: 10px;
+}
+.form{
+    padding: 0px 5px;
+}
+.rrss{
+    width: 100%;
+    text-align: center;
+    padding: 0px 0px 3%;
+}
+.rrss a{
+    width: 29px;
+    height: 29px;
+    margin: 0px 7px;
+    font-size: 20px;
+}
+.email{
+    width: 78%;
+    height: 35px;
+    padding: 10px;
+    border: none;
+    font-family: var(--montserrat);
+    font-size: 18px;
+    color: var(--color-primario);
+    background: rgba(92, 92, 92, 0.33);
+    border-radius: 45px;
+    margin: 5px 0px;
+}
+.btnS{
+    width: 20%;
+    height: 35px;
+    border: none;
+    padding: 5px;
+    font-family: var(--montserrat);
+    font-size: 15px;
+    color: var(--color-primario);
+    text-shadow: 0px 0px 5px transparent;
+    text-align: center;
+    background-image: var(--button);
+    border-radius: 45px;
+    margin: 5px 0px;
+    cursor: pointer;
+    transition: .3s;
+    overflow: hidden;
+}
+.mesagediv{
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    background: rgba(92, 92, 92, 0.33);
+    border-radius: 30px;
+    margin: 5px 0px;
+    overflow: hidden;
+}
+.mesage{
+    width: 100%;
+    height: 100px;
+    border: none;
+    border-radius: 30px;
+    font-family: var(--montserrat);
+    font-size: 18px;
+    color: var(--color-primario);
+    background: transparent;
+    padding-top: 10px;
+}
+/* Reglas Especificas */
+
+
+/* -------------------Elementos-------------------- */
+.menu-mob{
+    width: 100%;
+    color: var(--color-primario-d);
+    font-size: 20px;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    padding: 4%;
+    background-image: var(--menumob);
+    z-index: 2000;
+}
+/* Figuras de fondo */
+/* Este es el div que contiene el fondo en movimiento con las diferentes imágenes difuminadas para interarlo sin que resalte mucho a la vista */
+.figuras{
+    width: 100vw;
+    height: 100vh;
+    filter: blur(30px);
+    position: fixed;
+    z-index: -1000;
+    top: 0px;
+}
+/* Dimensiones y posicionamiento de cada figura. */
+.vct1{
+    width: 30%;
+    left: 10%;
+    top: 20%;
+    position: absolute;
+}
+.vct2{
+    width: 80%;
+    left: 10%;
+    top: 0%;
+    position: absolute;
+}
+.vct3{
+    width: 30%;
+    right: 5%;
+    bottom: 0%;
+    position: absolute;
+}
+.vct4{
+    width: 25%;
+    right: 5%;
+    top: 0%;
+    position: absolute;
+}
+.vct5{
+    width: 60%;
+    left: 10%;
+    bottom: 0%;
+    position: absolute;
+}
+/* Movimento en 360º infinito que usa el fondo.
+El div usa el rotor de 30s y las figura el rotorslow de 50s.*/
+.rotor{
+    animation: spin 30s linear infinite;
+    -webkit-animation: spin 30s linear infinite;
+}
+.rotorslow{
+    animation: spin 50s linear infinite;
+    -webkit-animation: spin 50s linear infinite;
+}
+@keyframes spin{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+
+
+/* Responsive */
+/* ---------------------------------Tablet--------------------------------- */
+
+
+
+@media (min-width: 768px){
+        /* Parametros */
+        
+    /* Normalizadores */
+    h1{
+        font-size: 25px;
+    }
+    h2{
+        font-size: 30px;
+    }
+    h3{
+        font-size: 35px;
+    }
+    h4{
+        font-size: 15px;
+    }
+    ul{
+        font-size: 20px;
+    }
+    /* Reglas recursivas */
+    .flex{
+        /*flex*/
+        justify-content: flex-start;
+    }
+    footer{
+        margin-top: 40px;
+    }
+    /* Reglas generales */
+    /* Section 1 */
+    .s1 div article {
+        width: 90%;
+        padding: 10px 20px 15px 20px;
+        margin: auto;
+    }
+    .s1 h2{
+        font-size: 40px;
+        font-weight: 900;
+    }
+    .s1 p{
+        font-size: 20px;
+    }
+    /* Section 2 */
+    .level-max{
+        height: 9px;
+    }
+    .s2 h2{
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    .s2 h4{
+        font-size: 15px;
+        padding: 3px 0px;
+    }
+    .lis2{
+        font-size: 12px;
+        padding: 1% 0;
+    }
+    .s2 li{
+        font-size: 15px;
+    }
+    /* Section 3 */
+    .s3ed{
+        width: 100%;
+        padding: 10px 20px 15px 20px;
+        margin: auto;
+    }
+    ul{
+        padding-top: 10px;
+    }
+    .btnC{
+        width: 20%;
+    }
+
+    /* Footer */
+    .imgcert img{
+        height: 30px;
+    }
+
+    /* Portfolio */
+    .card{
+        width: 100%;
+        height: 10%;
+        background-image: var(--card);
+        border-radius: 30px;
+        margin: 20px 0px;
+    }
+    .espmid{
+        margin: 15px 0px;
+    }
+    /* Contact */
+    .cs1w{
+        width: 100%;
+    }
+    .rrss{
+        padding: 3% 0px;
+    }
+    .rrss a{
+        margin: 0px 20px;
+        font-size: 45px;
+    }
+}
+
+
+/* ---------------------------------720p----------------------------------*/
+
+
+@media (min-width: 1280px){
+    /* Parametros */
+    
+    /* Normalizadores */
+    h1{
+        font-size: 25px;
+    }
+    h2{
+        font-size: 72px;
+        padding: 2px;
+    }
+    h3{
+        font-size: 35px;
+    }
+    /* Reglas recursivas */
+    .flex{
+        flex-direction: row;
+    }
+    /* Reglas generales */
+    /* Header */
+    header{
+        height: 100px;
+    }
+    .logo{
+        z-index: 2050;
+    }
+    .logo h1{
+        padding: 10px;
+        margin-left: 20px;
+    }
+    .menu-mob-bot,
+    .menubtn{
+        display: none;
+    }
+    .menu-desk{
+        display: inline-block;
+        position: fixed;
+        text-align: center;
+        left: 0px;
+        right: 0px;
+        margin: 15px 100px;
+    }
+    .menu-desk a{
+        color: var(--color-primario-d);
+        font-family: var(--montserrat);
+        font-size: 15px;
+        margin: 0px 50px;
+        transition: .3s;
+        border: 2px solid transparent;
+    }
+    .menu-desk a:hover{
+        border-bottom: 2px solid var(--color-primario-d);
+    }
+
+    /* Sidebar */
+    .sidebar-iz,
+    .sidebar-der{
+        width: 12.1%; 
+        height: 100vh;
+        padding: 6% 4% 6% 4%;
+        position: fixed;
+        display: block;
+        top: 0px;
+    }
+    .sidebar-der{
+        right: 0px;
+    }
+    .imgcont{
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        border-radius: 45px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    
+    /* Section */
+    section{
+        padding-top: 75px;
+    }
+    .glass{
+        width: 80%;
+        height: 98%;
+        border-radius: 45px;
+        margin: auto;
+        padding: 4%;
+        /* margin: 6% 10% 0%; */
+    }
+    /* Section 1 */
+    .s1 figure{
+        height: 100%;
+    }
+    .s1 div article {
+        width: 100%;
+    }
+    
+    /* Section 2 */
+    .grids2{
+        width: 70%;
+        height: 100%;
+        /* Grid */
+        grid-template-rows: 5% 55% 40%;
+    }
+    .s2 h4{
+        font-size: 10px;
+        padding: 5px 0px;
+    }
+    .lis2{
+        font-size: 12px;
+        padding: 1% 0;
+    }
+    .s2 figure{
+        width: 30%;
+        height: 100%;
+    }
+    /* Section 3 */
+    .s3 figure{
+        height: 100%;
+    }
+    .s3 img{
+        width: 100%;
+        height: 100%;
+    }
+    .s3ed{
+        height: 100%;
+        padding: 10px 20px 15px 20px;
+    }
+    ul{
+        padding-top: 10px;
+    }
+    /* Footer */
+    footer{
+        padding: 0px 10%;
+    }
+    .imgcert img{
+        height: 35px;
+    }
+    .copy{
+        padding: 1%;
+    }
+
+    /* Portfolio */
+    /* Nueva integración para repartir las tarjetitas del portfolio en la version de Desktop. */
+    .pad{
+        /*flex*/
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .card{
+        width: 49%;
+        height: 20%;
+        margin: 5px 0px;
+    }
+
+    /* Contact */
+    .cs1w{
+        width: 60%;
+    }
+
+    /* Reglas Especificas */
+    .about{
+        border-bottom: 2px solid var(--color-primario-d) !important;
+    }
+    .port{
+        border-bottom: 2px solid var(--color-primario-d) !important;
+    }
+    .cont{
+        border-bottom: 2px solid var(--color-primario-d) !important; 
+    }
+    }
+    /* Elementos */
+    /* Figuras de fondo */
+    .figuras{
+        width: 100vw;
+        height: 100vh;
+        filter: blur(110px);
+        position: fixed;
+        z-index: -1000;
+        top: 0px;
+    }
+    .vct1{
+        width: 20%;
+        left: 10%;
+        top: 20%;
+        position: fixed;
+    }
+    .vct2{
+        width: 50%;
+        left: 10%;
+        top: 0%;
+        position: fixed;
+    }
+    .vct3{
+        width: 30%;
+        right: 5%;
+        bottom: 0%;
+        position: fixed;
+    }
+
+
+
+/* --------------------------1080p--------------------------- */
+
+
+
+@media (min-width: 1920px){
+        /* Parametros */
+        
+    /* Normalizadores */
+    h1{
+        font-size: 25px;
+    }
+    h2{
+        font-size: 100px;
+        padding: 2px;
+    }
+    h3{
+        font-size: 35px;
+    }
+    h4{
+        font-size: 30px;
+    }
+    ul{
+        font-size: 40px;
+    }
+    p{
+        font-size: 25px;
+    }
+    /* Reglas recursivas */
+
+    /* Reglas generales */
+    /* Section */
+    section{
+        padding-top: 115px;
+    }
+    /* Section 1 */
+    .s1 h2{
+        font-size: 70px;
+    }
+    .s1 p{
+        font-size: 28px;
+    }
+    /* Section 2 */
+    .s2 h4{
+        font-size: 20px;
+        padding: 5px 0px;
+    }
+    .s2 li{
+        font-size: 20px;
+    }
+    /* Footer */
+    .imgcert img{
+        height: 55px;
+    }
+    /* Portfolio */
+    /* Tarjetitas del portfolio */
+    .card{
+        width: 49%;
+        height: 20%;
+    }
+
+    /* Section 3 */
+    .btnC{
+        width: 10%;
+    }
+
+    /* Contact */
+    .cs1w{
+        width: 50%;
+    }
+    .rrss a{
+        width: 100px;
+        height: 100px;
+        margin: 0px 4%;
+    }
+}
